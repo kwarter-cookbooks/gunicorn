@@ -20,10 +20,9 @@
 
 include_recipe 'python'
 
-unless node["gunicorn"]["virtualenv"].nil?
-  python_virtualenv node["gunicorn"]["virtualenv"] do
-    action :create
-  end
+python_virtualenv node["gunicorn"]["virtualenv"] do
+  action :create
+  not_if { node["gunicorn"]["virtualenv"].nil? }
 end
 
 python_pip "gunicorn" do
