@@ -30,12 +30,13 @@ attribute :preload_app, :kind_of => [TrueClass, FalseClass], :default => false
 
 attribute :worker_processes, :kind_of => Integer, :default => 4
 attribute :worker_class, :kind_of => String, :default => 'sync'
-attribute :worker_timeout, :kind_of => Integer, :default => 60 
+attribute :worker_timeout, :kind_of => Integer, :default => 60
 attribute :worker_keepalive, :kind_of => Integer, :default => 2
 attribute :worker_max_requests, :kind_of => Integer, :default => 0
+attribute :worker_connections, :kind_of => Integer, :default => nil
 
 attribute :server_hooks, :kind_of => Hash, :default => {}, \
-    :callbacks => { 
+    :callbacks => {
       "should contain a valid gunicorn server hook name" => lambda { |hooks| Chef::Resource::GunicornConfig.validate_server_hook_hash_keys(hooks)}
     }
 
