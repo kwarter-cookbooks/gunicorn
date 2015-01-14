@@ -35,6 +35,17 @@ attribute :worker_keepalive, :kind_of => Integer, :default => 2
 attribute :worker_max_requests, :kind_of => Integer, :default => 0
 attribute :worker_connections, :kind_of => Integer, :default => nil
 
+attribute :accesslog, :kind_of => String, :default => nil
+attribute :access_log_format, :kind_of => String, :default => nil
+attribute :errorlog, :kind_of => String, :default => nil
+attribute :loglevel, :kind_of => String, :default => nil
+attribute :logger_class, :kind_of => String, :default => nil
+attribute :logconfig, :kind_of => String, :default => nil
+attribute :secure_scheme_headers, :kind_of => Hash, :default => nil
+attribute :forwarded_allow_ips, :kind_of => String, :default => nil
+attribute :proc_name, :kind_of => String, :default => nil
+
+
 attribute :server_hooks, :kind_of => Hash, :default => {}, \
     :callbacks => {
       "should contain a valid gunicorn server hook name" => lambda { |hooks| Chef::Resource::GunicornConfig.validate_server_hook_hash_keys(hooks)}

@@ -54,28 +54,38 @@ Creates a Gunicorn configuration file at the path specified.  Meant to be deploy
 - owner: The owner for the configuration file.
 - group: The group owner of the configuration file (string or id).
 - pid: A filename to use for the PID file. default is no pidfile
+- accesslog: The access log file to write to.
+- access_log_format: The access log format.
+- errorlog: The error log file to write to.
+- loglevel: The granularity of error log outputs.
+- logger_class: The logger you want to use to log events in gunicorn.
+- logconfig: The log config file to use.
+- secure_scheme_headers: A hash containing headers and values that the front-end proxy uses to indicate HTTPS requests.
+- forwarded_allow_ips: Front-end's IPs from which allowed to handle set secure headers. (comma separate).
+- proc_name: A base to use with setproctitle for process naming.
+
 
 # Example
-    
+
     # create a config with the default values
     gunicorn_config "/etc/gunicorn/myapp.py" do
       action :create
     end
-    
+
     # tweak some worker related values...we're web scale baby
     gunicorn_config "/etc/gunicorn/myapp.py" do
       worker_processes 8
       backlog 4096
       action :create
     end
-    
-    # use the 'pre_fork' server hook to 
+
+    # use the 'pre_fork' server hook to
     # sleep for a second before forking
     gunicorn_config "/etc/gunicorn/myapp.py" do
       server_hooks({:pre_fork => 'import time;time.sleep(1)'})
       action :create
     end
-    
+
 Usage
 =====
 
